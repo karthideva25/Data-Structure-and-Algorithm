@@ -4,7 +4,7 @@ class SegmentTree{
     SegmentTree(int n){
         seg.resize(4*n+1);
     }
-    void build(int index, int low, int high, vector<int>& arr){
+    void build(int index, int low, int high, vector<int>& arr){  // O(N)
         if(low == high){
             seg[index] = arr[low];
             return;
@@ -14,7 +14,7 @@ class SegmentTree{
         build(2*index+2,mid+1,high,arr);
         seg[index] = min(seg[2*index+1],seg[2*index+2]);
     }
-    int query(int index,int low,int high,int l,int r){
+    int query(int index,int low,int high,int l,int r){ // O(Log(N))
         // complete overlap {l,low,high,r}
         if (low>=l && r>=high){
             return seg[index];
@@ -29,7 +29,7 @@ class SegmentTree{
         int right = query(2*index+2,mid+1,high,l,r);
         return min(left,right);
     }
-    void update(int index,int low,int high,int i,int value){
+    void update(int index,int low,int high,int i,int value){ // O(Log(N))
         if(low == high){
             seg[index] = value;
             return ;
